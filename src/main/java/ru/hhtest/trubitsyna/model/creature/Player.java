@@ -5,6 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 
 import static java.lang.Math.min;
 
+
+/**
+ * Class present creature with type Player.
+ */
 @SuperBuilder
 @Slf4j
 public class Player extends Creature {
@@ -13,6 +17,9 @@ public class Player extends Creature {
     private static final double HEAL_MODIFIER = 0.5;
     private int healCount;
 
+    /**
+     * Method for heal player.
+     */
     @Override
     public void heal() {
         if (healCount < MAX_HEAL_COUNT) {

@@ -6,9 +6,32 @@ import ru.hhtest.trubitsyna.model.creature.Creature;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Class for show example of usage.
+ */
 @Slf4j
 public class Simulator {
     private static final Random GENERATOR = new Random();
+
+    /**
+     * Method run simulator.
+     *
+     * @param player present player.
+     * @param monsters present crowd of monsters.
+     */
+    public static void run(Creature player, List<Creature> monsters) {
+        boolean isPlayerTurn = true;
+        int deadMonstersCount = 0;
+        while (!player.isDead() && deadMonstersCount != monsters.size()) {
+            deadMonstersCount = makeTurn(player, monsters, isPlayerTurn);
+            isPlayerTurn = !isPlayerTurn;
+        }
+        if (!player.isDead()) {
+            log.info("Player win!");
+        } else {
+            log.info("Player loose!");
+        }
+    }
 
     private static int makeTurn(Creature player, List<Creature> monsters, boolean isPlayerTurn) {
         int deadMonstersCount = 0;
@@ -30,17 +53,5 @@ public class Simulator {
         }
         return deadMonstersCount;
     }
-    public static void run(Creature player, List<Creature> monsters) {
-        boolean isPlayerTurn = true;
-        int deadMonstersCount = 0;
-        while (!player.isDead() && deadMonstersCount != monsters.size()) {
-            deadMonstersCount = makeTurn(player, monsters, isPlayerTurn);
-            isPlayerTurn = !isPlayerTurn;
-        }
-        if (!player.isDead()) {
-            log.info("Player win!");
-        } else {
-            log.info("Player loose!");
-        }
-    }
+
 }

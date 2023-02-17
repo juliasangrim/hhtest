@@ -9,12 +9,14 @@ import ru.hhtest.trubitsyna.model.damage.DamageGenerator;
 import static ru.hhtest.trubitsyna.model.dice.DiceThrowSimulator.SUCCESS_BOUND;
 import static ru.hhtest.trubitsyna.model.dice.DiceThrowSimulator.throwDice;
 
+/**
+ * Class present creature.
+ */
 @SuperBuilder
 @Getter
 @Setter
 @Slf4j
 public abstract class Creature {
-
     private static final int MIN_ATTACK_MODIFIER = 1;
 
     private String name;
@@ -25,8 +27,16 @@ public abstract class Creature {
     private int damageMinBound;
     private int damageMaxBound;
 
+    /**
+     * Method for heal creature.
+     */
     public abstract void heal();
 
+    /**
+     * Method for attack enemy.
+     *
+     * @param enemy creature, which you attack.
+     */
     public void attack(Creature enemy) {
         if (!isDead() && !enemy.isDead()) {
             int attackModifier = attack - enemy.defence + 1 > 0 ? attack - enemy.defence + 1 : MIN_ATTACK_MODIFIER;
@@ -37,6 +47,11 @@ public abstract class Creature {
         }
     }
 
+    /**
+     * Method for track creature death.
+     *
+     * @return true - when creature is dead, false - otherwise.
+     */
     public boolean isDead() {
         return currHp <= 0;
     }
